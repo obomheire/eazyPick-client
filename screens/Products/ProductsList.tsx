@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
 
-import { productListProps } from "../../../utils/interface";
+import { productListProps } from "../../utils/interface";
 import ProductsCard from "./ProductsCard";
 
 const ProductsList = ({ item }: productListProps) => {
