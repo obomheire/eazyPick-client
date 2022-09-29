@@ -24,6 +24,7 @@ import ProductList from "./ProductsList";
 import data from "../../assets/data/products.json";
 import SearchBar from "../../shared/SearchBar";
 import SearchedProduct from "./SearchedProduct";
+import Banner from "../../shared/Banner";
 
 const { height } = Dimensions.get("window");
 
@@ -71,8 +72,8 @@ const ProductsContainer = () => {
           <SearchedProduct productsFiltered={productsFiltered} />
         </ScrollView>
       ) : (
-        <View>
-          <Text>Product container</Text>
+        <>
+          <Banner />
           <ScrollView horizontal={true}>
             <FlatList
               data={products}
@@ -81,7 +82,7 @@ const ProductsContainer = () => {
               renderItem={({ item }) => <ProductList item={item} />}
             />
           </ScrollView>
-        </View>
+        </>
       )}
     </ScrollView>
   );
