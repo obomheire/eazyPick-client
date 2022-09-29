@@ -22,33 +22,67 @@ import ProductList from "./ProductsList";
 // import baseURL from "../../assets/common/baseUrl";
 
 import data from "../../assets/data/products.json";
+import SearchBar from "../../shared/SearchBar";
+import SearchedProduct from "./SearchedProduct";
 
 const { height } = Dimensions.get("window");
 
 const ProductsContainer = () => {
   const [products, setProducts] = useState<Products[]>([]);
-  const [productFilter, setProductFilter] = useState<Products[]>([]);
+  const [productsFiltered, setProductsFiltered] = useState<Products[]>([]);
+  const [focus, setFocus] = useState<boolean>(false);
 
   useEffect(() => {
     setProducts(data);
-    setProductFilter(data);
+    setProductsFiltered(data);
+    // setFocus(false);
 
     return () => {
       setProducts([]);
-      setProductFilter([]);
+      setProductsFiltered([]);
+      //  setFocus();
     };
   }, []);
+
+  // Product Methods
+  const searchProduct = (text: string) => {
+    setProductsFiltered(
+      products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
+    );
+  };
+
+  const openList = () => {
+    setFocus(true);
+  };
+
+  const onBlur = () => {
+    setFocus(false);
+  };
   return (
     <ScrollView>
-      <Text>Product container</Text>
-      <ScrollView horizontal={true}>
-        <FlatList
-          data={products}
-          keyExtractor={(item) => item._id.$oid}
-          renderItem={({ item }) => <ProductList item={item} />}
-          numColumns={2}
-        />
-      </ScrollView>
+      <SearchBar
+        onFocus={openList}
+        onChangeText={(text: string) => searchProduct(text)}
+        onBlur={onBlur}
+        focus={focus}
+      />
+      {focus == true ? (
+        <ScrollView horizontal={true}>
+          <SearchedProduct productsFiltered={productsFiltered} />
+        </ScrollView>
+      ) : (
+        <View>
+          <Text>Product container</Text>
+          <ScrollView horizontal={true}>
+            <FlatList
+              data={products}
+              numColumns={2}
+              keyExtractor={(item) => item._id.$oid}
+              renderItem={({ item }) => <ProductList item={item} />}
+            />
+          </ScrollView>
+        </View>
+      )}
     </ScrollView>
   );
 };

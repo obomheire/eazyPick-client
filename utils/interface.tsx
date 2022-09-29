@@ -25,4 +25,17 @@ export type ProductsCardProps = {
   item: Products;
 };
 
+export type SearchedProductProps = {
+  // item: Products;
+  productsFiltered: Products[];
+};
+
+export type SearchBarProps = {
+  onFocus: () => void;
+  onChangeText: (text: string) => void;
+  onBlur: () => void;
+  focus: boolean;
+};
+
+
 
