@@ -84,7 +84,7 @@ const ProductsContainer = () => {
       setProductsCtg(productsData);
     } else {
       setProductsCtg(
-        productsData.filter((i) => i.category.$oid === tabViewId)
+        productsData.filter((value) => value.category.$oid === tabViewId)
       );
     }
   }, [tabViewId]);
