@@ -17,6 +17,14 @@ export interface Products {
   __v: number;
 }
 
+export interface Categories {
+  _id: {
+    $oid: string;
+  };
+  name: string;
+  __v: number;
+}
+
 export type productListProps = {
   item: Products;
 };

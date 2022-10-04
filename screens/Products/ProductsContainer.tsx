@@ -9,40 +9,59 @@ import {
   Text,
   SafeAreaView,
 } from "react-native";
-import { Container, Header, Icon, Item, Input } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";
 // import baseUrl from "../../assets/common/baseUrl";
 import axios from "axios";
-import { Products } from "../../utils/interface";
+import { Categories, Products } from "../../utils/interface";
 
 import ProductList from "./ProductsList";
 // import SearchedProduct from "./SearchedProducts";
-// import Banner from "../../Shared/Banner";
-// import CategoryFilter from "./CategoryFilter";
 // import baseURL from "../../assets/common/baseUrl";
 
-import data from "../../assets/data/products.json";
+import productsData from "../../assets/data/products.json";
+import ProductsCategoriesData from "../../assets/data/categories.json";
+
 import SearchBar from "../../shared/SearchBar";
 import SearchedProduct from "./SearchedProduct";
 import Banner from "../../shared/Banner";
+import CategoriesFiter from "./CategoriesFiter";
 
 const { height } = Dimensions.get("window");
 
+// type tabView = {
+//   index: number;
+//   key: string;
+//   title: string;
+// };
+
 const ProductsContainer = () => {
+  const allCtr = [
+    {
+      key: "5f15d5cdcb4a6642bddc0fe9p",
+      title: "All",
+    },
+  ];
+
   const [products, setProducts] = useState<Products[]>([]);
   const [productsFiltered, setProductsFiltered] = useState<Products[]>([]);
   const [focus, setFocus] = useState<boolean>(false);
+  const [categories, setCategories] = useState<Categories[]>([]);
+  const [productsCtg, setProductsCtg] = useState<Products[]>([]);
+  const [active, setActive] = useState<boolean>(false);
+  // const [initialState, setInitialState] = useState<Products[]>([]);
+  const [tabViewId, setTabViewId] = useState<string>("");
+
+  // const [loading, setLoading] = useState(true);
+
+  // const [route, setRoute] = useState([]);
 
   useEffect(() => {
-    setProducts(data);
-    setProductsFiltered(data);
+    setProducts(productsData);
+    setProductsFiltered(productsData);
     // setFocus(false);
-
-    return () => {
-      setProducts([]);
-      setProductsFiltered([]);
-      //  setFocus();
-    };
+    setCategories(ProductsCategoriesData);
+    // setActive(-1);
+    // setInitialState(productsData);
   }, []);
 
   // Product Methods
@@ -59,6 +78,17 @@ const ProductsContainer = () => {
   const onBlur = () => {
     setFocus(false);
   };
+
+  useEffect(() => {
+    if (tabViewId === "5f15d5cdcb4a6642bddc0fe9p") {
+      setProductsCtg(productsData);
+    } else {
+      setProductsCtg(
+        productsData.filter((i) => i.category.$oid === tabViewId)
+      );
+    }
+  }, [tabViewId]);
+
   return (
     <ScrollView>
       <SearchBar
@@ -75,12 +105,26 @@ const ProductsContainer = () => {
         <>
           <Banner />
           <ScrollView horizontal={true}>
-            <FlatList
-              data={products}
-              numColumns={2}
-              keyExtractor={(item) => item._id.$oid}
-              renderItem={({ item }) => <ProductList item={item} />}
+            <CategoriesFiter
+              categories={categories}
+              setTabViewId={setTabViewId}
+              active={active}
+              setActive={setActive}
             />
+          </ScrollView>
+          <ScrollView horizontal={true}>
+            {productsCtg.length > 0 ? (
+              <FlatList
+                data={productsCtg}
+                numColumns={2}
+                keyExtractor={(item) => item._id.$oid}
+                renderItem={({ item }) => <ProductList item={item} />}
+              />
+            ) : (
+              <View>
+                <Text>No products found</Text>
+              </View>
+            )}
           </ScrollView>
         </>
       )}
@@ -102,9 +146,5 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     flexWrap: "wrap",
     backgroundColor: "gainsboro",
-  },
-  center: {
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
