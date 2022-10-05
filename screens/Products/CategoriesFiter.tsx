@@ -8,26 +8,16 @@ import ProductsCategoriesData from "../../assets/data/categories.json";
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 type CategoriesFiterProps = {
-  categories: Categories[];
-  setActive: (active: boolean) => void;
   setTabViewId: (index: string) => void;
-  // productsCtg: Products[];
-  active: boolean;
-  // setRoute: (routes: any) => void;
 };
 
 const CategoriesFiter = ({
-  categories,
-  setActive,
   setTabViewId,
-  // productsCtg,
-  active,
-}: // setRoute,
-CategoriesFiterProps) => {
+}: CategoriesFiterProps) => {
+  const [active, setActive] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
 
   const menuItems = ProductsCategoriesData.map((value) => {
-    // console.log(value.name);
     return {
       key: value._id.$oid,
       title: value.name,
@@ -42,8 +32,6 @@ CategoriesFiterProps) => {
   ];
 
   const [routes] = useState([...allCtr, ...menuItems]);
-  // setRoute(routes);
-  // console.log(routes);
 
   const renderTabBar = (props: any) => (
     <TabBar
@@ -57,16 +45,10 @@ CategoriesFiterProps) => {
     />
   );
 
-  //   const UpdateRoute = () => {
-  //     return <View></View>;
-  //   };
-
   return (
     <ScrollView>
       <TouchableOpacity
-        onPress={() => {
-          console.log(index);
-        }}
+        onPress={() => {}}
       >
         <>
           <TabView
@@ -79,11 +61,12 @@ CategoriesFiterProps) => {
             style={[
               styles.center,
               { margin: 5 },
-              active === false ? styles.active : styles.inActive,
+              active === true ? styles.active : styles.inActive,
             ]}
           />
           {useEffect(() => {
             setTabViewId(routes[index].key);
+            setActive(true);
           }, [routes[index].key])}
         </>
       </TouchableOpacity>

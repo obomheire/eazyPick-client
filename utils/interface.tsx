@@ -27,6 +27,7 @@ export interface Categories {
 
 export type productListProps = {
   item: Products;
+  navigation: any;
 };
 
 export type ProductsCardProps = {

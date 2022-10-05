@@ -6,9 +6,12 @@ const { width } = Dimensions.get("window");
 import { productListProps } from "../../utils/interface";
 import ProductsCard from "./ProductsCard";
 
-const ProductsList = ({ item }: productListProps) => {
+const ProductsList = ({ item, navigation }: productListProps) => {
   return (
-    <TouchableOpacity style={{ width: '50%' }}>
+    <TouchableOpacity
+      style={{ width: "50%" }}
+      onPress={() => navigation.navigate("ProductDetail", { item })}
+    >
       <View style={{ width: width / 2, backgroundColor: "gainsboro" }}>
         <ProductsCard item={item} />
       </View>

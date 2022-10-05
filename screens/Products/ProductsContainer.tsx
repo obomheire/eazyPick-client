@@ -25,6 +25,7 @@ import SearchBar from "../../shared/SearchBar";
 import SearchedProduct from "./SearchedProduct";
 import Banner from "../../shared/Banner";
 import CategoriesFiter from "./CategoriesFiter";
+import { Props } from "../../types";
 
 const { height } = Dimensions.get("window");
 
@@ -34,7 +35,7 @@ const { height } = Dimensions.get("window");
 //   title: string;
 // };
 
-const ProductsContainer = () => {
+const ProductsContainer = ({ navigation }: Props) => {
   const allCtr = [
     {
       key: "5f15d5cdcb4a6642bddc0fe9p",
@@ -47,7 +48,6 @@ const ProductsContainer = () => {
   const [focus, setFocus] = useState<boolean>(false);
   const [categories, setCategories] = useState<Categories[]>([]);
   const [productsCtg, setProductsCtg] = useState<Products[]>([]);
-  const [active, setActive] = useState<boolean>(false);
   // const [initialState, setInitialState] = useState<Products[]>([]);
   const [tabViewId, setTabViewId] = useState<string>("");
 
@@ -105,12 +105,7 @@ const ProductsContainer = () => {
         <>
           <Banner />
           <ScrollView horizontal={true}>
-            <CategoriesFiter
-              categories={categories}
-              setTabViewId={setTabViewId}
-              active={active}
-              setActive={setActive}
-            />
+            <CategoriesFiter setTabViewId={setTabViewId} />
           </ScrollView>
           <ScrollView horizontal={true}>
             {productsCtg.length > 0 ? (
@@ -118,7 +113,9 @@ const ProductsContainer = () => {
                 data={productsCtg}
                 numColumns={2}
                 keyExtractor={(item) => item._id.$oid}
-                renderItem={({ item }) => <ProductList item={item} />}
+                renderItem={({ item }) => (
+                  <ProductList item={item} navigation={navigation} />
+                )}
               />
             ) : (
               <View>
