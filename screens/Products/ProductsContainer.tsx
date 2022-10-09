@@ -25,7 +25,7 @@ import SearchBar from "../../shared/SearchBar";
 import SearchedProduct from "./SearchedProduct";
 import Banner from "../../shared/Banner";
 import CategoriesFiter from "./CategoriesFiter";
-import { Props } from "../../types";
+import { HomeStackProps } from "../../types";
 
 const { height } = Dimensions.get("window");
 
@@ -35,7 +35,7 @@ const { height } = Dimensions.get("window");
 //   title: string;
 // };
 
-const ProductsContainer = ({ navigation }: Props) => {
+const ProductsContainer = ({ navigation }: HomeStackProps) => {
   const allCtr = [
     {
       key: "5f15d5cdcb4a6642bddc0fe9p",

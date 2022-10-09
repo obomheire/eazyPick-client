@@ -12,4 +12,5 @@ export type CartStackParamList = {
 };
 
 
-export type Props = StackScreenProps<HomeStackParamList>;
+export type HomeStackProps = StackScreenProps<HomeStackParamList>;
+export type CartStackProps = StackScreenProps<CartStackParamList>;

@@ -41,8 +41,7 @@ const ProductsCard = ({ item }: ProductsCardProps) => {
           <Button
             title="Add"
             color={"green"}
-            onPress={() => dispatch(addToCart(name))}
-            // onPress={() =>console.warn(name)}
+            onPress={() => dispatch(addToCart(item))}
           />
         </View>
       ) : (

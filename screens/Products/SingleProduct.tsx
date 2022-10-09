@@ -7,10 +7,10 @@ import {
   Button,
 } from "react-native";
 import React, { useState } from "react";
-import { Props } from "../../types";
+import { HomeStackProps } from "../../types";
 import { Products } from "../../utils/interface";
 
-const SingleProduct = ({ navigation, route }: Props) => {
+const SingleProduct = ({ navigation, route }: HomeStackProps) => {
   const { item } = route.params;
 
   const [items, setItems] = useState<Products>(item);
