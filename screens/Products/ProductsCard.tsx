@@ -8,11 +8,17 @@ import {
   Button,
 } from "react-native";
 import { ProductsCardProps } from "../../utils/interface";
+import { useSelector, useDispatch } from "react-redux";
+// import { RootState } from "../../redux/store";
+import { addToCart } from "../../redux/slices/cartItemsSlice";
 
 const { width } = Dimensions.get("window");
 
 const ProductsCard = ({ item }: ProductsCardProps) => {
   const { name, price, image, countInStock } = item;
+
+  // const cartItems = useSelector((state: RootState) => state.cartItems.products);
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -32,7 +38,12 @@ const ProductsCard = ({ item }: ProductsCardProps) => {
       <Text style={styles.price}>${price}</Text>
       {countInStock > 0 ? (
         <View style={{ marginBottom: 60 }}>
-          <Button title="Add" color={"green"} />
+          <Button
+            title="Add"
+            color={"green"}
+            onPress={() => dispatch(addToCart(name))}
+            // onPress={() =>console.warn(name)}
+          />
         </View>
       ) : (
         <Text style={{ marginTop: 20 }}>Item is currently unavailable</Text>

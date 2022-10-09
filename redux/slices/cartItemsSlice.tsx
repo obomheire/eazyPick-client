@@ -3,22 +3,23 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { CartItemsState, Products } from "../../utils/interface";
 
 const initialState: CartItemsState = {
-  products: [],
+  cartItem: [],
 };
 
 export const cartItemsSlice = createSlice({
   name: "cartItems",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<Products>) => {
-      //   state.cartItems.push(action.payload);
-      [...state.products, action.payload];
+    addToCart: (state, action: PayloadAction<string>) => {
+        state.cartItem.push(action.payload);
+    //   [...state.cartItem, action.payload];
+    //   console.log(state);
     },
-    removeFromCart: (state, action: PayloadAction<Products>) => {
-      state.products.filter((cartItem) => cartItem !== action.payload);
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      state.cartItem.filter((cartItem) => cartItem !== action.payload);
     },
     clearCart: (state) => {
-      state.products = [];
+      state.cartItem = [];
     },
   },
 });

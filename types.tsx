@@ -6,4 +6,10 @@ export type HomeStackParamList = {
   ProductDetail: { item: Products };
 };
 
+export type CartStackParamList = {
+  Cart: undefined;
+  Checkout: undefined;
+};
+
+
 export type Props = StackScreenProps<HomeStackParamList>;
