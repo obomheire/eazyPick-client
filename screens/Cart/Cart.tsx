@@ -22,7 +22,7 @@ const Cart = ({ navigation }: CartStackProps) => {
 
   let total = 0;
   cartItems.forEach((item) => {
-    total += item.price;
+    total += +item.price.toFixed(2);
   });
 
   return (
