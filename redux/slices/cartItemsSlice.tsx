@@ -13,7 +13,6 @@ export const cartItemsSlice = createSlice({
     addToCart: (state, action: PayloadAction<string>) => {
         state.cartItem.push(action.payload);
     //   [...state.cartItem, action.payload];
-    //   console.log(state);
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.cartItem.filter((cartItem) => cartItem !== action.payload);

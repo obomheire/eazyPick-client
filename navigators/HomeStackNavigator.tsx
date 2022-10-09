@@ -28,6 +28,6 @@ function MyStack() {
   );
 }
 
-export default function HomeNavigator() {
+export default function HomeStackNavigator() {
   return <MyStack />;
 }

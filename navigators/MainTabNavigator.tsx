@@ -2,8 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { View } from "react-native";
-import HomeNavigator from "./HomeNavigator";
-import CartNavigator from "./CartNavigator";
+import HomeStackNavigator from "./HomeStackNavigator";
+import CartStackNavigator from "./CartStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 //   ]
 // }
 
-const Main = () => {
+const MainTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -37,7 +37,7 @@ const Main = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeNavigator}
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="home" color={color} size={30} />
@@ -47,7 +47,7 @@ const Main = () => {
       />
       <Tab.Screen
         name="Cart"
-        component={CartNavigator}
+        component={CartStackNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <View>
@@ -60,7 +60,7 @@ const Main = () => {
       />
       <Tab.Screen
         name="Admin"
-        component={HomeNavigator}
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="cog" color={color} size={30} />
@@ -70,7 +70,7 @@ const Main = () => {
       />
       <Tab.Screen
         name="User"
-        component={HomeNavigator}
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="user" color={color} size={30} />
@@ -82,4 +82,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainTabNavigator;

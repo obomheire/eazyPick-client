@@ -27,6 +27,6 @@ function MyStack() {
   );
 }
 
-export default function CartNavigator() {
+export default function CartStackNavigator() {
   return <MyStack />;
 }

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import ProductContainer from "./screens/Products/ProductsContainer";
 import Header from "./shared/Header";
 import { NavigationContainer } from "@react-navigation/native";
-import Main from "./navigators/Main";
+import MainTabNavigator from "./navigators/MainTabNavigator";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Header />
-        <Main />
+        <MainTabNavigator />
         {/* <ProductContainer /> */}
       </NavigationContainer>
     </Provider>
