@@ -5,13 +5,17 @@ import ProductContainer from "./screens/Products/ProductsContainer";
 import Header from "./shared/Header";
 import { NavigationContainer } from "@react-navigation/native";
 import Main from "./navigators/Main";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 export default function App() {
   return (
-    <NavigationContainer>
-      <Header />
-      <Main />
-      {/* <ProductContainer /> */}
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Header />
+        <Main />
+        {/* <ProductContainer /> */}
+      </NavigationContainer>
+    </Provider>
   );
 }
 
