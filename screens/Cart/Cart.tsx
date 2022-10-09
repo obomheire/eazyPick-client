@@ -10,15 +10,18 @@ import {
   Button,
   ScrollView,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CartStackProps } from "../../types";
+import {removeFromCart} from "../../redux/slices/cartItemsSlice";
+
 
 var { height, width } = Dimensions.get("window");
 
 const Cart = ({ navigation }: CartStackProps) => {
-  const cartItems = useSelector((state: RootState) => state.cartItems.products);
+  const cartItems = useSelector((state: RootState) => state.cartItems.cart);
+  const dispatch = useDispatch();
 
   let total = 0;
   cartItems.forEach((item) => {
@@ -62,7 +65,7 @@ const Cart = ({ navigation }: CartStackProps) => {
                     <View style={{}}>
                       <Button
                         title="remove"
-                        // onPress={() => console.log(item._id.$oid)}
+                        onPress={() => dispatch(removeFromCart(item._id.$oid))}
                       />
                     </View>
                   </View>
@@ -105,12 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingRight: 10,
-    marginTop: "100%",
-    // position: "absolute",
-    // bottom: 0,
-    // left: 0,
-    // backgroundColor: "white",
-    // elevation: 20,
+    marginTop: 30,
   },
   price: {
     fontSize: 15,
@@ -128,7 +126,7 @@ const styles = StyleSheet.create({
   },
   hiddenButton: {
     backgroundColor: "red",
-    justifyContent: "center",
+    justifyConte5nt: "center",
     alignItems: "flex-end",
     paddingRight: 25,
     height: 70,

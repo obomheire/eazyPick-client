@@ -17,7 +17,7 @@ const { width } = Dimensions.get("window");
 const ProductsCard = ({ item }: ProductsCardProps) => {
   const { name, price, image, countInStock } = item;
 
-  // const cartItems = useSelector((state: RootState) => state.cartItems.products);
+  // const cartItems = useSelector((state: RootState) => state.cartItems.cart);
   const dispatch = useDispatch();
 
   return (

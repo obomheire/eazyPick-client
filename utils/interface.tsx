@@ -47,5 +47,5 @@ export type SearchBarProps = {
 };
 
 export interface CartItemsState {
-  products: Products[];
+  cart: Products[];
 }

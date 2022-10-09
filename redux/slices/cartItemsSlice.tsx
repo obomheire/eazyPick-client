@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { CartItemsState, Products } from "../../utils/interface";
 
 const initialState: CartItemsState = {
-    products: [],
+  cart: [],
 };
 
 export const cartItemsSlice = createSlice({
@@ -11,14 +11,15 @@ export const cartItemsSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Products>) => {
-        //   [...state.products, action.payload];
-        state.products.push(action.payload);
+      state.cart = [...state.cart, action.payload];
     },
-    removeFromCart: (state, action: PayloadAction<Products>) => {
-      state.products.filter((product) => product !== action.payload);
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      state.cart = state.cart.filter(
+        (item) => item._id.$oid !== action.payload
+      );
     },
     clearCart: (state) => {
-      state.products = [];
+      state.cart = [];
     },
   },
 });
