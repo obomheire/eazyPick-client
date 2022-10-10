@@ -12,6 +12,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart } from "../../redux/slices/cartItemsSlice";
 import { CartItemProps } from "../../utils/interface";
+import { SwipeListView } from "react-native-swipe-list-view";
 
 var { height, width } = Dimensions.get("window");
 

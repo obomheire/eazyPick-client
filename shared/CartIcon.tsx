@@ -19,14 +19,11 @@ const CartIcon = () => {
 
 const styles = StyleSheet.create({
   badge: {
-    width: 25,
+    width: 32,
+    height: 30,
     position: "absolute",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-    top: -4,
-    right: -15,
+    top: -10,
+    right: -20,
     backgroundColor: "red",
     borderRadius: 50,
   },

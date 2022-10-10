@@ -10,7 +10,6 @@ import {
   Button,
   ScrollView,
 } from "react-native";
-import { SwipeListView } from "react-native-swipe-list-view";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
