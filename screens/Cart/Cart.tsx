@@ -10,12 +10,13 @@ import {
   Button,
   ScrollView,
 } from "react-native";
+import { SwipeListView } from "react-native-swipe-list-view";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CartStackProps } from "../../types";
-import {removeFromCart} from "../../redux/slices/cartItemsSlice";
-
+import { removeFromCart, clearCart } from "../../redux/slices/cartItemsSlice";
+import CartItem from "./CartItem";
 
 var { height, width } = Dimensions.get("window");
 
@@ -32,56 +33,22 @@ const Cart = ({ navigation }: CartStackProps) => {
     <ScrollView>
       {cartItems.length ? (
         <>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <FlatList
-              data={cartItems}
-              keyExtractor={(item) => Math.random().toString()}
-              renderItem={({ item }) => {
-                return (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      marginHorizontal: 10,
-                    }}
-                  >
-                    <View>
-                      <Image
-                        style={styles.image}
-                        resizeMode="contain"
-                        source={{
-                          uri: item.image
-                            ? item.image
-                            : "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png",
-                        }}
-                      />
-                    </View>
-                    <View style={{ width: width / 2.5 - 40 }}>
-                      <Text style={styles.name}>{item.name}</Text>
-                    </View>
-                    <View style={{ width: width / 3.5 }}>
-                      <Text style={styles.price}>$ {item.price}</Text>
-                    </View>
-                    <View style={{}}>
-                      <Button
-                        title="remove"
-                        onPress={() => dispatch(removeFromCart(item._id.$oid))}
-                      />
-                    </View>
-                  </View>
-                );
-              }}
-            />
-          </ScrollView>
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.headerText}>Cart Items</Text>
+          </View>
+          <CartItem cartItems={cartItems} />
           <View style={styles.bottomContainer}>
             <View>
               <Text style={styles.price}>$ {total}</Text>
             </View>
             <View>
-              <Button title="clear" />
+              <Button title="clear" onPress={() => dispatch(clearCart())} />
             </View>
             <View>
-              <Button title="checkout" onPress={()=> navigation.navigate("Checkout")} />
+              <Button
+                title="checkout"
+                onPress={() => navigation.navigate("Checkout")}
+              />
             </View>
           </View>
         </>
@@ -136,5 +103,6 @@ const styles = StyleSheet.create({
     width: width / 4 - 30,
     height: width / 6,
   },
+  headerText: { fontSize: 30, fontWeight: "400" },
   // body: { flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10 },
 });

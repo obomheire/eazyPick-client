@@ -46,6 +46,10 @@ export type SearchBarProps = {
   focus: boolean;
 };
 
+export type CartItemProps = {
+  cartItems: Products[];
+};
+
 export interface CartItemsState {
   cart: Products[];
 }
