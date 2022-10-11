@@ -49,7 +49,7 @@ const Cart = ({ navigation }: CartStackProps) => {
             <View>
               <Button
                 title="checkout"
-                onPress={() => navigation.navigate("Checkout")}
+                onPress={() => navigation.navigate("CheckoutScreen")}
               />
             </View>
           </View>

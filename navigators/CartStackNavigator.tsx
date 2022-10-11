@@ -10,14 +10,14 @@ function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Cart"
+        name="CartScreen"
         component={Cart}
         options={{
           headerShown: false
         }}
       />
       <Stack.Screen
-        name="Checkout"
+        name="CheckoutScreen"
         component={Checkout}
         options={{
           title: "Checkout",
