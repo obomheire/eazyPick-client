@@ -29,13 +29,16 @@ const Cart = ({ navigation }: CartStackProps) => {
   });
 
   return (
-    <ScrollView>
+    // <ScrollView>
+    <View style={styles.container}>
       {cartItems.length ? (
         <>
           <View style={{ alignItems: "center" }}>
             <Text style={styles.headerText}>Cart Items</Text>
           </View>
+
           <CartItem cartItems={cartItems} />
+
           <View style={styles.bottomContainer}>
             <View>
               <Text style={styles.price}>$ {total}</Text>
@@ -57,13 +60,15 @@ const Cart = ({ navigation }: CartStackProps) => {
           <Text>Please add product to your cart to get started</Text>
         </View>
       )}
-    </ScrollView>
+    </View>
+    // </ScrollView>
   );
 };
 
 export default Cart;
 
 const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "gainsboro" },
   emptyContainer: {
     height: height,
     alignItems: "center",
@@ -74,7 +79,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingRight: 10,
-    marginTop: 30,
   },
   price: {
     fontSize: 15,
@@ -84,19 +88,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 15,
     margin: 15,
-  },
-  hiddenContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    flexDirection: "row",
-  },
-  hiddenButton: {
-    backgroundColor: "red",
-    justifyConte5nt: "center",
-    alignItems: "flex-end",
-    paddingRight: 25,
-    height: 70,
-    width: width / 1.2,
   },
   image: {
     width: width / 4 - 30,
