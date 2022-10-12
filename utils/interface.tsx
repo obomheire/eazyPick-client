@@ -65,11 +65,23 @@ export type InputProps = {
   onChangeText: (text: string) => void;
 };
 
-
 // export type country = {
 //   name: string;
 //   code: string;
 // };
+
+export type order = {
+  city: string;
+  country: string;
+  dateOrdered: number;
+  orderItems: Products[];
+  phone: string;
+  shippingAddress1: string;
+  shippingAddress2: string;
+  // status: "3";
+  // user,
+  zip: string;
+};
 
 export interface CartItemsState {
   cart: Products[];

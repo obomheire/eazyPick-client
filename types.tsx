@@ -1,6 +1,7 @@
 import type { StackScreenProps } from "@react-navigation/stack";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { Products } from "./utils/interface";
+import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import { order, Products } from "./utils/interface";
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
@@ -19,7 +20,14 @@ export type CartStackParamList = {
 //   User: undefined;
 // };
 
+export type CheckoutTopTabParamList = {
+  Shipping: undefined;
+  Payment: { order: order };
+  Confirm: undefined;
+};
+
 
 export type HomeStackProps = StackScreenProps<HomeStackParamList>;
 export type CartStackProps = StackScreenProps<CartStackParamList>;
 // export type RootTabProps = BottomTabScreenProps<RootTabParamList>;
+export type CheckoutTopTabProps = MaterialTopTabScreenProps<CheckoutTopTabParamList>;

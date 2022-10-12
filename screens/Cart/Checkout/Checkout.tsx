@@ -11,14 +11,15 @@ import { RootState } from "../../../redux/store";
 import countries from "../../../assets/countries.json";
 import { Products } from "../../../utils/interface";
 import RNPickerSelect from "react-native-picker-select";
+// import { CheckoutTopTabProps } from "../../../types";
 
 var { height, width } = Dimensions.get("window");
 
-const Checkout = () => {
+const Checkout = ({ navigation }: any) => {
   const cartItems = useSelector((state: RootState) => state.cartItems.cart);
   // const context = useContext(AuthGlobal);
 
-  const [orderItems, setOrderItems] = useState<Products[]>();
+  const [orderItems, setOrderItems] = useState<Products[]>([]);
   const [address, setAddress] = useState("");
   const [address2, setAddress2] = useState("");
   const [city, setCity] = useState("");
@@ -44,7 +45,7 @@ const Checkout = () => {
   }, []);
 
   const checkOut = () => {
-    console.log("orders", orderItems);
+    // console.log("orders", orderItems);
     let order = {
       city,
       country,
@@ -53,66 +54,66 @@ const Checkout = () => {
       phone,
       shippingAddress1: address,
       shippingAddress2: address2,
-      status: "3",
-      user,
+      // status: "3",
+      // user,
       zip,
     };
 
-    // props.navigation.navigate("Payment", { order: order });
+    navigation.navigate("Payment", { order });
   };
 
   return (
-      <KeyboardAwareScrollView
-        viewIsInsideTabBar={true}
-        extraHeight={200}
-        enableOnAndroid={true}
-      >
-        <FormContainer title={"Shipping Address"}>
-          <Input
-            placeholder={"Phone"}
-            name={"phone"}
-            value={phone}
-            keyboardType={"numeric"}
-            onChangeText={(text: string) => setPhone(text)}
-          />
-          <Input
-            placeholder={"Shipping Address 1"}
-            name={"ShippingAddress1"}
-            value={address}
-            keyboardType={"default"}
-            onChangeText={(text: string) => setAddress(text)}
-          />
-          <Input
-            placeholder={"Shipping Address 2"}
-            name={"ShippingAddress2"}
-            value={address2}
-            keyboardType={"default"}
-            onChangeText={(text: string) => setAddress2(text)}
-          />
-          <Input
-            placeholder={"City"}
-            name={"city"}
-            value={city}
-            keyboardType={"default"}
-            onChangeText={(text: string) => setCity(text)}
-          />
-          <Input
-            placeholder={"Zip Code"}
-            name={"zip"}
-            value={zip}
-            keyboardType={"numeric"}
-            onChangeText={(text: string) => setZip(text)}
-          />
-          <RNPickerSelect
-            onValueChange={(value) => setCountry(value)}
-            items={countries}
-          />
+    <KeyboardAwareScrollView
+      viewIsInsideTabBar={true}
+      extraHeight={200}
+      enableOnAndroid={true}
+    >
+      <FormContainer title={"Shipping Address"}>
+        <Input
+          placeholder={"Phone"}
+          name={"phone"}
+          value={phone}
+          keyboardType={"numeric"}
+          onChangeText={(text: string) => setPhone(text)}
+        />
+        <Input
+          placeholder={"Shipping Address 1"}
+          name={"ShippingAddress1"}
+          value={address}
+          keyboardType={"default"}
+          onChangeText={(text: string) => setAddress(text)}
+        />
+        <Input
+          placeholder={"Shipping Address 2"}
+          name={"ShippingAddress2"}
+          value={address2}
+          keyboardType={"default"}
+          onChangeText={(text: string) => setAddress2(text)}
+        />
+        <Input
+          placeholder={"City"}
+          name={"city"}
+          value={city}
+          keyboardType={"default"}
+          onChangeText={(text: string) => setCity(text)}
+        />
+        <Input
+          placeholder={"Zip Code"}
+          name={"zip"}
+          value={zip}
+          keyboardType={"numeric"}
+          onChangeText={(text: string) => setZip(text)}
+        />
+        <RNPickerSelect
+          onValueChange={(value) => setCountry(value)}
+          items={countries}
+        />
 
-          <View style={{ width: "80%", alignItems: "center", marginTop: 20 }}>
-            <Button title="Confirm" onPress={() => checkOut()} />
-          </View>
-        </FormContainer>
-      </KeyboardAwareScrollView>
+        <View style={{ width: "80%", alignItems: "center"}}>
+          <Button title="Confirm" onPress={() => checkOut()} />
+        </View>
+      </FormContainer>
+    </KeyboardAwareScrollView>
   );
 };
 
