@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Header from "./shared/Header";
 import { NavigationContainer } from "@react-navigation/native";
-import MainTabNavigator from "./navigators/MainTabNavigator";
+import MainBottomTabNavigator from "./navigators/MainBottomTabNavigator";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { NativeBaseProvider, Box } from "native-base";
@@ -13,10 +13,9 @@ export default function App() {
       <Provider store={store}>
         <NavigationContainer>
           <Header />
-          <MainTabNavigator />
+          <MainBottomTabNavigator />
         </NavigationContainer>
       </Provider>
     </NativeBaseProvider>
   );
 }
-

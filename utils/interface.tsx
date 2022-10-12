@@ -1,3 +1,5 @@
+import { KeyboardTypeOptions } from "react-native";
+
 export interface Products {
   _id: {
     $oid: string;
@@ -49,6 +51,25 @@ export type SearchBarProps = {
 export type CartItemProps = {
   cartItems: Products[];
 };
+
+export type FormContainerProps = {
+  title: string;
+  children: React.ReactNode;
+};
+
+export type InputProps = {
+  placeholder: string;
+  name: string;
+  value: string;
+  keyboardType: KeyboardTypeOptions | undefined;
+  onChangeText: (text: string) => void;
+};
+
+
+// export type country = {
+//   name: string;
+//   code: string;
+// };
 
 export interface CartItemsState {
   cart: Products[];

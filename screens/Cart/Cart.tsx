@@ -29,7 +29,6 @@ const Cart = ({ navigation }: CartStackProps) => {
   });
 
   return (
-    // <ScrollView>
     <View style={styles.container}>
       {cartItems.length ? (
         <>
@@ -61,7 +60,6 @@ const Cart = ({ navigation }: CartStackProps) => {
         </View>
       )}
     </View>
-    // </ScrollView>
   );
 };
 

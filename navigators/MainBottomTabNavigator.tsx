@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 //   ]
 // }
 
-const MainTabNavigator = () => {
+const MainBottomTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -83,4 +83,4 @@ const MainTabNavigator = () => {
   );
 };
 
-export default MainTabNavigator;
+export default MainBottomTabNavigator;
