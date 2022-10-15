@@ -1,4 +1,5 @@
 import { KeyboardTypeOptions } from "react-native";
+import { HomeStackProps } from "../types";
 
 export interface Products {
   _id: {
@@ -29,7 +30,7 @@ export interface Categories {
 
 export type productListProps = {
   item: Products;
-  navigation: any;
+  navigation: HomeStackProps<"ProductDetailScreen">["navigation"];
 };
 
 export type ProductsCardProps = {
@@ -73,7 +74,7 @@ export type InputProps = {
 export type order = {
   city: string;
   country: string;
-  dateOrdered: number;
+  dateOrdered: Date;
   orderItems: Products[];
   phone: string;
   shippingAddress1: string;

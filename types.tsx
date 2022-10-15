@@ -26,8 +26,16 @@ export type CheckoutTopTabParamList = {
   Confirm: undefined;
 };
 
+export type HomeStackProps<Screen extends keyof HomeStackParamList> = StackScreenProps<
+  HomeStackParamList,
+  Screen
+  >;
 
-export type HomeStackProps = StackScreenProps<HomeStackParamList>;
+export type CheckoutTopTabProps<Screen extends keyof CheckoutTopTabParamList> =
+  MaterialTopTabScreenProps<CheckoutTopTabParamList, Screen>;
+
+
+// export type HomeStackProps = StackScreenProps<HomeStackParamList>;
 export type CartStackProps = StackScreenProps<CartStackParamList>;
 // export type RootTabProps = BottomTabScreenProps<RootTabParamList>;
-export type CheckoutTopTabProps = MaterialTopTabScreenProps<CheckoutTopTabParamList>;
+// export type CheckoutTopTabProps = MaterialTopTabScreenProps<CheckoutTopTabParamList>;

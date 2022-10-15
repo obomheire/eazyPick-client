@@ -10,7 +10,10 @@ import React, { useState } from "react";
 import { HomeStackProps } from "../../types";
 import { Products } from "../../utils/interface";
 
-const SingleProduct = ({ navigation, route }: HomeStackProps) => {
+const SingleProduct = ({
+  navigation,
+  route,
+}: HomeStackProps<"ProductDetailScreen">) => {
   const { item } = route.params;
 
   const [items, setItems] = useState<Products>(item);
