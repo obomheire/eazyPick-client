@@ -17,22 +17,23 @@ const paymentCards = [
   { name: "Other", value: 4 },
 ];
 
-export type paymentProps = {
+export type PaymentProps = {
   order: order;
-  navigation: CheckoutTopTabProps<"Payment">["navigation"];
-  route: CheckoutTopTabProps<"Payment">["route"];
-  
+  // navigation: CheckoutTopTabProps<"Payment">["navigation"];
+  // route: CheckoutTopTabProps<"Payment">["route"];
 };
 
-const Payment = ({ order, route, navigation }: paymentProps) => {
+const Payment = ({ order}: PaymentProps) => {
   // const orderParams = route.params.order;
+
+  console.log("order", order);
 
   const [selected, setSelected] = useState<number>(0);
   const [card, setCard] = useState();
   return (
     <Container>
       <View>
-          <Text>Choose your payment method</Text>
+        <Text>Choose your payment method</Text>
       </View>
       <View>
         {

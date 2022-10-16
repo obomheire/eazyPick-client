@@ -74,7 +74,7 @@ export type InputProps = {
 export type order = {
   city: string;
   country: string;
-  dateOrdered: Date;
+  dateOrdered: string;
   orderItems: Products[];
   phone: string;
   shippingAddress1: string;
@@ -86,4 +86,8 @@ export type order = {
 
 export interface CartItemsState {
   cart: Products[];
+}
+
+export interface OrderItemsState {
+  order: order;
 }

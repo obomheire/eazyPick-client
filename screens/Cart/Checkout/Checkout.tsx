@@ -12,11 +12,13 @@ import countries from "../../../assets/countries.json";
 import { Products } from "../../../utils/interface";
 import RNPickerSelect from "react-native-picker-select";
 // import { CheckoutTopTabProps } from "../../../types";
+import { setOrder } from "../../../redux/slices/orderItemsSlice";
 
 var { height, width } = Dimensions.get("window");
 
 const Checkout = ({ navigation }: any) => {
   const cartItems = useSelector((state: RootState) => state.cartItems.cart);
+  const dispatch = useDispatch();
   // const context = useContext(AuthGlobal);
 
   const [orderItems, setOrderItems] = useState<Products[]>([]);
@@ -27,6 +29,19 @@ const Checkout = ({ navigation }: any) => {
   const [country, setCountry] = useState("");
   const [phone, setPhone] = useState("");
   const [user, setUser] = useState();
+
+  let order = {
+    city,
+    country,
+    dateOrdered: new Date(Date.now()).toString(),
+    orderItems,
+    phone,
+    shippingAddress1: address,
+    shippingAddress2: address2,
+    // status: "3",
+    // user,
+    zip,
+  };
 
   useEffect(() => {
     setOrderItems(cartItems);
@@ -45,21 +60,8 @@ const Checkout = ({ navigation }: any) => {
   }, []);
 
   const checkOut = () => {
-    // console.log("orders", orderItems);
-    let order = {
-      city,
-      country,
-      dateOrdered: Date.now(),
-      orderItems,
-      phone,
-      shippingAddress1: address,
-      shippingAddress2: address2,
-      // status: "3",
-      // user,
-      zip,
-    };
-
-    navigation.navigate("Payment", { order });
+    dispatch(setOrder(order));
+    navigation.navigate("Payment");
   };
 
   return (
@@ -109,8 +111,8 @@ const Checkout = ({ navigation }: any) => {
           items={countries}
         />
 
-        <View style={{ width: "80%", alignItems: "center"}}>
-          <Button title="Confirm" onPress={() => checkOut()} />
+        <View style={{ width: "80%", alignItems: "center" }}>
+          <Button title="Confirm" onPress={checkOut} />
         </View>
       </FormContainer>
     </KeyboardAwareScrollView>

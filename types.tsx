@@ -22,7 +22,7 @@ export type CartStackParamList = {
 
 export type CheckoutTopTabParamList = {
   Shipping: undefined;
-  Payment: { order: order };
+  Payment: undefined;
   Confirm: undefined;
 };
 
