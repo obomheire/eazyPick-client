@@ -91,3 +91,17 @@ export interface CartItemsState {
 export interface OrderItemsState {
   order: order;
 }
+
+export type methodValue = {
+  name: string;
+  value: number;
+};
+
+export type RadioButtonprops = {
+  methods: methodValue[];
+};
+
+export type valueState = {
+  value: number;
+};
+

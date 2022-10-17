@@ -4,18 +4,6 @@ import { CartItemsState, order, Products } from "../../utils/interface";
 
 const initialState: CartItemsState = {
   cart: [],
-  // order: {
-  //   city: "",
-  //   country: "",
-  //   dateOrdered: "",
-  //   orderItems: [],
-  //   phone: "",
-  //   shippingAddress1: "",
-  //   shippingAddress2: "",
-  //   // status: "3",
-  //   // user,
-  //   zip: "",
-  // },
 };
 
 export const cartItemsSlice = createSlice({

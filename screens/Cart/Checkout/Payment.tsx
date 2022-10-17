@@ -1,8 +1,18 @@
 import React, { useState } from "react";
-import { View, Button, Text } from "react-native";
+import {
+  View,
+  Button,
+  Text,
+  FlatList,
+  Dimensions,
+  StyleSheet,
+} from "react-native";
 import { Container, Radio, Icon } from "native-base";
 import { order } from "../../../utils/interface";
 import { CheckoutTopTabProps } from "../../../types";
+import RadioButton from "../../../shared/RadioButton";
+
+var { height, width } = Dimensions.get("window");
 
 const methods = [
   { name: "Cash on Delivery", value: 1 },
@@ -23,17 +33,13 @@ export type PaymentProps = {
   // route: CheckoutTopTabProps<"Payment">["route"];
 };
 
-const Payment = ({ order}: PaymentProps) => {
-  // const orderParams = route.params.order;
-
-  console.log("order", order);
-
+const Payment = ({ order }: PaymentProps) => {
   const [selected, setSelected] = useState<number>(0);
   const [card, setCard] = useState();
   return (
-    <Container>
+    <View>
       <View>
-        <Text>Choose your payment method</Text>
+        <Text style={styles.textHeader}>Choose your payment method</Text>
       </View>
       <View>
         {
@@ -43,13 +49,29 @@ const Payment = ({ order}: PaymentProps) => {
           //     <Left>
           //       <Text>{item.name}</Text>
           //     </Left>
-          //     {/* <Right>
+          //     <Right>
           //       <Radio selected={selected == item.value} />
-          //     </Right> */}
+          //     </Right>
           //   </ListItem>
           // );
           // })
+          // <FlatList
+          //   data={methods}
+          //   keyExtractor={(item) => item.name}
+          //   renderItem={({ item }) => (
+          //     <View style={styles.listView}>
+          //       <View>
+          //         <Text>{item.name}</Text>
+          //       </View>
+          //       <View>
+          //         <Text>{item.name}</Text>
+          //       </View>
+          //     </View>
+          //   )}
+          //   style={{ width: width }}
+          // />
         }
+        <RadioButton methods={methods} />
         {/* {selected == 3 ? (
           <Picker
             mode="dropdown"
@@ -72,8 +94,23 @@ const Payment = ({ order}: PaymentProps) => {
           /> */}
         {/* </View> */}
       </View>
-    </Container>
+    </View>
   );
 };
 
 export default Payment;
+
+const styles = StyleSheet.create({
+  textHeader: {
+    fontWeight: "bold",
+    fontSize: 20,
+    paddingLeft: 5,
+    paddingTop: 10,
+  },
+  listView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: width,
+    padding: 10,
+  },
+});

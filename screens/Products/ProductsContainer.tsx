@@ -35,7 +35,7 @@ const { height } = Dimensions.get("window");
 //   title: string;
 // };
 
-const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
+const ProductsContainer = ({ navigation }: HomeStackProps<"ProductDetailScreen">) => {
   const allCtr = [
     {
       key: "5f15d5cdcb4a6642bddc0fe9p",
