@@ -99,6 +99,7 @@ export type methodValue = {
 
 export type RadioButtonprops = {
   methods: methodValue[];
+  setSelected: (value: number) => void;
 };
 
 export type valueState = {

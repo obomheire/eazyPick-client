@@ -48,7 +48,7 @@ const CartItem = ({ cartItems }: CartItemProps) => {
             <View style={{ width: width / 3 + 80 }}>
               <Text style={styles.name}>{item.name}</Text>
             </View>
-            <View style={{}}>
+            <View>
               <Text style={styles.price}>$ {item.price}</Text>
             </View>
           </View>

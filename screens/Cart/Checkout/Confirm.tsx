@@ -1,15 +1,20 @@
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import React from 'react'
+import { order } from "../../../utils/interface";
 
 var { height, width } = Dimensions.get("window");
 
-const Confirm = () => {
+export type ConfirmProps = {
+  order: order;
+}
+
+const Confirm = ({ order }: ConfirmProps) => {
   return (
     <View>
       <Text>Confirm Screen</Text>
     </View>
-  )
-}
+  );
+};
 
 export default Confirm
 

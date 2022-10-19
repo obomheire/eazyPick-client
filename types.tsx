@@ -1,6 +1,10 @@
 import type { StackScreenProps } from "@react-navigation/stack";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import {
+  MaterialTopTabScreenProps,
+  MaterialTopTabNavigationProp,
+} from "@react-navigation/material-top-tabs";
+import { RouteProp } from "@react-navigation/native";
 import { order, Products } from "./utils/interface";
 
 export type HomeStackParamList = {
@@ -26,14 +30,16 @@ export type CheckoutTopTabParamList = {
   Confirm: undefined;
 };
 
-export type HomeStackProps<Screen extends keyof HomeStackParamList> = StackScreenProps<
-  HomeStackParamList,
-  Screen
-  >;
+export type HomeStackProps<Screen extends keyof HomeStackParamList> =
+  StackScreenProps<HomeStackParamList, Screen>;
+
+// export type CheckoutTopTabProps<T extends keyof CheckoutTopTabParamList> = {
+//   navigation: MaterialTopTabNavigationProp<CheckoutTopTabParamList, T>;
+//   route: RouteProp<CheckoutTopTabParamList, T>;
+// };
 
 export type CheckoutTopTabProps<Screen extends keyof CheckoutTopTabParamList> =
   MaterialTopTabScreenProps<CheckoutTopTabParamList, Screen>;
-
 
 // export type HomeStackProps = StackScreenProps<HomeStackParamList>;
 export type CartStackProps = StackScreenProps<CartStackParamList>;

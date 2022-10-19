@@ -2,50 +2,38 @@ import { View, TouchableOpacity, Text, StyleSheet, FlatList } from "react-native
 import React, { useState } from "react";
 import { RadioButtonprops, valueState } from "../utils/interface";
 
-const RadioButton = ({ methods }: RadioButtonprops) => {
+const RadioButton = ({ methods, setSelected }: RadioButtonprops) => {
   const [value, setValue] = useState<valueState>({ value: 0 });
 
   return (
     <View>
       {
-        // methods.map((item) => {
-        // return (
-        //   <View key={item.value} style={styles.container}>
-        //     <Text style={styles.radioText}>{item.name}</Text>
-        //     <TouchableOpacity
-        //       style={styles.radioCircle}
-        //       onPress={() => {
-        //         setValue({
-        //           value: item.value,
-        //         });
-        //       }}
-        //     >
-        //       {value.value === item.value && <View style={styles.selectedRb} />}
-        //     </TouchableOpacity>
-        //   </View>
-        // );
-        // })
-        <FlatList data={methods} keyExtractor={(item) => item.name} renderItem={({ item }) => {
-               return (
-                 <View key={item.value} style={styles.container}>
-                   <Text style={styles.radioText}>{item.name}</Text>
-                   <TouchableOpacity
-                     style={styles.radioCircle}
-                     onPress={() => {
-                       setValue({
-                         value: item.value,
-                       });
-                     }}
-                   >
-                     {value.value === item.value && (
-                       <View style={styles.selectedRb} />
-                     )}
-                   </TouchableOpacity>
-                 </View>
-               );
-        } } />
+        <FlatList
+          data={methods}
+          keyExtractor={(item) => item.name}
+          renderItem={({ item }) => {
+            return (
+              <View key={item.value} style={styles.container}>
+                <Text style={styles.radioText}>{item.name}</Text>
+                <TouchableOpacity
+                  style={styles.radioCircle}
+                  onPress={() => {
+                    setValue({
+                      value: item.value,
+                    });
+                    setSelected(item.value);
+                  }}
+                >
+                  {value.value === item.value && (
+                    <View style={styles.selectedRb} />
+                  )}
+                </TouchableOpacity>
+              </View>
+            );
+          }}
+        />
       }
-      <Text> Selected: {value.value} </Text>
+      {/* <Text> Selected: {value.value} </Text> */}
     </View>
   );
 };
