@@ -38,7 +38,7 @@ const Payment = ({ order, navigation, route }: PaymentProps) => {
       </View>
       <View>
         <RadioButton methods={methods} setSelected={setSelected} />
-        {selected == 3 ? (
+        {selected === 3 ? (
           <RNPickerSelect
             onValueChange={(value) => setCard(value)}
             items={paymentCards}
