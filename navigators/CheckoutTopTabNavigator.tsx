@@ -26,6 +26,8 @@ export default function CheckoutTopTabNavigator() {
   return <MyTabs />;
 }
 
+// My error is on this screen:
+
 
 // inorder to have access to the navigation props, it is advisable you use it this way
 // <Tab.Screen
