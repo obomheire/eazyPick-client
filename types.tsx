@@ -26,8 +26,8 @@ export type CartStackParamList = {
 
 export type CheckoutTopTabParamList = {
   Shipping: undefined;
-  Payment: undefined;
-  Confirm: undefined;
+  Payment: { order: order; };
+  Confirm: { order: order; };
 };
 
 export type HomeStackProps<Screen extends keyof HomeStackParamList> =

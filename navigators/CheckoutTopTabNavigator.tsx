@@ -16,14 +16,8 @@ function MyTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Shipping" component={Checkout} />
-      <Tab.Screen
-        name="Payment"
-        children={(props) => <Payment order={order} {...props} />}
-      />
-      <Tab.Screen
-        name="Confirm"
-        children={() => <Confirm order={order} />}
-      />
+      <Tab.Screen name="Payment" component={Payment} />
+      <Tab.Screen name="Confirm" component={Confirm} />
     </Tab.Navigator>
   );
 }

@@ -22,10 +22,10 @@ const paymentCards = [
 
 export type PaymentProps = {
   order: order;
-  // navigation: CheckoutTopTabProps<"Payment">["navigation"];
-  // route: CheckoutTopTabProps<"Payment">["route"];
-  navigation: any;
-  route: any;
+  navigation: CheckoutTopTabProps<"Payment">["navigation"];
+  route: CheckoutTopTabProps<"Payment">["route"];
+  // navigation: any;
+  // route: any;
 };
 
 const Payment = ({ order, navigation, route }: PaymentProps) => {

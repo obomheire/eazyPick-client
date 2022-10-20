@@ -11,12 +11,12 @@ import { RootState } from "../../../redux/store";
 import countries from "../../../assets/countries.json";
 import { Products } from "../../../utils/interface";
 import RNPickerSelect from "react-native-picker-select";
-// import { CheckoutTopTabProps } from "../../../types";
+import { CheckoutTopTabProps } from "../../../types";
 import { setOrder } from "../../../redux/slices/orderItemsSlice";
 
 var { height, width } = Dimensions.get("window");
 
-const Checkout = ({ navigation }: any) => {
+const Checkout = ({ navigation }: CheckoutTopTabProps<"Shipping">) => {
   const cartItems = useSelector((state: RootState) => state.cartItems.cart);
   const dispatch = useDispatch();
   // const context = useContext(AuthGlobal);
@@ -61,7 +61,7 @@ const Checkout = ({ navigation }: any) => {
 
   const checkOut = () => {
     dispatch(setOrder(order));
-    navigation.navigate("Payment");
+    navigation.navigate("Payment", { order });
   };
 
   return (
