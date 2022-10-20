@@ -1,22 +1,66 @@
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import React from 'react'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+  Button,
+  Image,
+} from "react-native";
+import React from "react";
 import { order } from "../../../utils/interface";
 
 var { height, width } = Dimensions.get("window");
 
 export type ConfirmProps = {
   order: order;
-}
+};
 
 const Confirm = ({ order }: ConfirmProps) => {
   return (
-    <View>
-      <Text>Confirm Screen</Text>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.titleContainer}>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Confirm Order</Text>
+        {order ? (
+          <View style={{ borderWidth: 1, borderColor: "orange" }}>
+            <Text style={styles.title}>Shipping to:</Text>
+            <View style={{ padding: 8 }}>
+              <Text>Address: {order.shippingAddress1}</Text>
+              <Text>Address2: {order.shippingAddress2}</Text>
+              <Text>City: {order.city}</Text>
+              <Text>Zip Code: {order.zip}</Text>
+              <Text>Country: {order.country}</Text>
+            </View>
+            <Text style={styles.title}>Items:</Text>
+
+            {order.orderItems.map((x) => {
+              return (
+                <View style={styles.listItem} key={x.name} >
+                  <View>
+                    <Image source={{ uri: x.image }} style={{width:20, height:20} } />
+                  </View>
+                  <View style={styles.body}>
+                    <View>
+                      <Text>{x.name}</Text>
+                    </View>
+                    <View>
+                      <Text>$ {x.price}</Text>
+                    </View>
+                  </View>
+                </View>
+              );
+            })}
+          </View>
+        ) : null}
+        {/* <View style={{ alignItems: "center", margin: 20 }}>
+          <Button title={"Place order"} onPress={confirmOrder} />
+        </View> */}
+      </View>
+    </ScrollView>
   );
 };
 
-export default Confirm
+export default Confirm;
 
 const styles = StyleSheet.create({
   container: {
