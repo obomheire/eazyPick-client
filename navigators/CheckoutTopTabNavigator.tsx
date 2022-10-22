@@ -22,7 +22,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Confirm"
-        children={() => <Confirm order={order} />}
+        children={(props) => <Confirm order={order} {...props} />}
       />
     </Tab.Navigator>
   );

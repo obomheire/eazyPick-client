@@ -16,9 +16,18 @@ export interface Products {
   category: {
     $oid: string;
   };
+  reviews: reviewsValue[];
   countInStock: number;
   __v: number;
+  richDescription: string;
+  images: string[];
 }
+
+type reviewsValue =  {
+  avatar: string;
+  name: string;
+  review: string;
+} 
 
 export interface Categories {
   _id: {
@@ -26,6 +35,8 @@ export interface Categories {
   };
   name: string;
   __v: number;
+  color: string;
+  icon: string;
 }
 
 export type productListProps = {

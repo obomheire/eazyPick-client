@@ -9,14 +9,25 @@ import {
 } from "react-native";
 import React from "react";
 import { order } from "../../../utils/interface";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../../../redux/slices/cartItemsSlice";
 
 var { height, width } = Dimensions.get("window");
 
 export type ConfirmProps = {
   order: order;
+  navigation: any;
 };
 
-const Confirm = ({ order }: ConfirmProps) => {
+const Confirm = ({ order, navigation }: ConfirmProps) => {
+  const dispatch = useDispatch();
+
+  const confirmOrder = () => {
+    setTimeout(() => {
+      dispatch(clearCart());
+      navigation.navigate("CartScreen");
+    }, 500);
+  };
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.titleContainer}>
@@ -33,28 +44,31 @@ const Confirm = ({ order }: ConfirmProps) => {
             </View>
             <Text style={styles.title}>Items:</Text>
 
-            {order.orderItems.map((x) => {
+            {order.orderItems.map((value) => {
               return (
-                <View style={styles.listItem} key={x.name} >
+                <View style={styles.listItem} key={value.name}>
                   <View>
-                    <Image source={{ uri: x.image }} style={{width:20, height:20} } />
+                    <Image
+                      source={{ uri: value.image }}
+                      style={{ width: 20, height: 20 }}
+                    />
                   </View>
-                  <View style={styles.body}>
-                    <View>
-                      <Text>{x.name}</Text>
-                    </View>
-                    <View>
-                      <Text>$ {x.price}</Text>
-                    </View>
+                  {/* <View style={styles.body}> */}
+                  <View>
+                    <Text>{value.name}</Text>
+                  </View>
+                  <View>
+                    <Text>$ {value.price}</Text>
+                    {/* </View> */}
                   </View>
                 </View>
               );
             })}
           </View>
         ) : null}
-        {/* <View style={{ alignItems: "center", margin: 20 }}>
+        <View style={{ alignItems: "center", margin: 20 }}>
           <Button title={"Place order"} onPress={confirmOrder} />
-        </View> */}
+        </View>
       </View>
     </ScrollView>
   );
@@ -83,12 +97,14 @@ const styles = StyleSheet.create({
   listItem: {
     alignItems: "center",
     backgroundColor: "white",
-    justifyContent: "center",
+    justifyContent: "space-between",
     width: width / 1.2,
-  },
-  body: {
-    margin: 10,
-    alignItems: "center",
     flexDirection: "row",
+    padding: 10,
   },
+  // body: {
+  //   margin: 10,
+  //   alignItems: "center",
+  //   flexDirection: "row",
+  // },
 });

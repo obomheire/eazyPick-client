@@ -31,7 +31,7 @@ export type CheckoutTopTabParamList = {
 };
 
 export type HomeStackProps<Screen extends keyof HomeStackParamList> =
-  StackScreenProps<HomeStackParamList, Screen>;
+  StackScreenProps<HomeStackParamList>;
 
 // export type CheckoutTopTabProps<T extends keyof CheckoutTopTabParamList> = {
 //   navigation: MaterialTopTabNavigationProp<CheckoutTopTabParamList, T>;
