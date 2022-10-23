@@ -10,17 +10,13 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-// import baseUrl from "../../assets/common/baseUrl";
+import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
 import { Categories, Products } from "../../utils/interface";
-
 import ProductList from "./ProductsList";
 // import SearchedProduct from "./SearchedProducts";
-// import baseURL from "../../assets/common/baseUrl";
-
-import productsData from "../../assets/data/products.json";
+// import productsData from "../../assets/data/products.json";
 import ProductsCategoriesData from "../../assets/data/categories.json";
-
 import SearchBar from "../../shared/SearchBar";
 import SearchedProduct from "./SearchedProduct";
 import Banner from "../../shared/Banner";
@@ -48,26 +44,58 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
   const [focus, setFocus] = useState<boolean>(false);
   const [categories, setCategories] = useState<Categories[]>([]);
   const [productsCtg, setProductsCtg] = useState<Products[]>([]);
-  // const [initialState, setInitialState] = useState<Products[]>([]);
+  const [initialState, setInitialState] = useState<Products[]>([]);
   const [tabViewId, setTabViewId] = useState<string>("");
 
   // const [loading, setLoading] = useState(true);
 
   // const [route, setRoute] = useState([]);
 
+  // useEffect(() => {
+  //   axios
+  //     .get(`${baseURL}/products`)
+  //     .then((res) => {
+  //       setProductsData(res.data);
+  //       // console.log(products);
+  //       // setProductsFiltered(res.data);
+  //       // setProductsCtg(res.data);
+  //       // setInitialState(res.data);
+  //       // // setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    setProducts(productsData);
-    setProductsFiltered(productsData);
-    // setFocus(false);
-    setCategories(ProductsCategoriesData);
-    // setActive(-1);
+    axios
+      .get(`${baseURL}/products`)
+      .then((res) => {
+        // console.log(products);
+        setProducts(res.data);
+        setProductsFiltered(res.data);
+        setProductsCtg(res.data);
+        setInitialState(res.data);
+        // // setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // setProducts(productsData);
+    // setProductsFiltered(productsData);
+    // setProductsCtg(productsData);
     // setInitialState(productsData);
+    // // setFocus(false);
+    // setCategories(ProductsCategoriesData);
+    // setActive(-1);
   }, []);
 
   // Product Methods
   const searchProduct = (text: string) => {
     setProductsFiltered(
-      products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
+      products.filter((value) =>
+        value.name.toLowerCase().includes(text.toLowerCase())
+      )
     );
   };
 
@@ -81,10 +109,12 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
 
   useEffect(() => {
     if (tabViewId === "5f15d5cdcb4a6642bddc0fe9p") {
-      setProductsCtg(productsData);
+      setProductsCtg(products);
     } else {
       setProductsCtg(
-        productsData.filter((value) => value.category.$oid === tabViewId)
+        products.filter((value) => {
+          return value.category.$oid === tabViewId;
+        })
       );
     }
   }, [tabViewId]);
@@ -112,7 +142,10 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
               <FlatList
                 data={productsCtg}
                 numColumns={2}
-                keyExtractor={(item) => item._id.$oid}
+                keyExtractor={(item, index) => {
+                  // console.log(item._id.$oid);
+                  return index.toString();
+                }}
                 renderItem={({ item }) => (
                   <ProductList item={item} navigation={navigation} />
                 )}

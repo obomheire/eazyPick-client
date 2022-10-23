@@ -66,6 +66,7 @@ const CategoriesFiter = ({
           />
           {useEffect(() => {
             setTabViewId(routes[index].key);
+            // console.log(routes[index].key);
             setActive(true);
           }, [routes[index].key])}
         </>
