@@ -59,7 +59,7 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"ProductDetailScreen">
     setProducts(productsData);
     setProductsFiltered(productsData);
     // setFocus(false);
-    setCategories(ProductsCategoriesData);
+    // setCategories(ProductsCategoriesData);
     // setActive(-1);
     // setInitialState(productsData);
   }, []);
