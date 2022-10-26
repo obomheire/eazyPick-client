@@ -15,7 +15,7 @@ import axios from "axios";
 import { Categories, Products } from "../../utils/interface";
 import ProductList from "./ProductsList";
 // import SearchedProduct from "./SearchedProducts";
-// import productsData from "../../assets/data/products.json";
+import productsData from "../../assets/data/products.json";
 import ProductsCategoriesData from "../../assets/data/categories.json";
 import SearchBar from "../../shared/SearchBar";
 import SearchedProduct from "./SearchedProduct";
@@ -51,44 +51,26 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
 
   // const [route, setRoute] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${baseURL}/products`)
-  //     .then((res) => {
-  //       setProductsData(res.data);
-  //       // console.log(products);
-  //       // setProductsFiltered(res.data);
-  //       // setProductsCtg(res.data);
-  //       // setInitialState(res.data);
-  //       // // setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
   useEffect(() => {
-    axios
-      .get(`${baseURL}/products`)
-      .then((res) => {
-        // console.log(products);
-        setProducts(res.data);
-        setProductsFiltered(res.data);
-        setProductsCtg(res.data);
-        setInitialState(res.data);
-        // // setLoading(false);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseURL}/products`);
+        const data = await response.data;
+        setProducts(data);
+        setProductsFiltered(data);
+        setProductsCtg(data);
+        setInitialState(data);
+        //     setFocus(false);
+        //     setLoading(false);
+        //     setActive(-1);
+      } catch (error) {
         console.log(error);
-      });
-    // setProducts(productsData);
-    // setProductsFiltered(productsData);
-    // setProductsCtg(productsData);
-    // setInitialState(productsData);
-    // // setFocus(false);
-    // setCategories(ProductsCategoriesData);
-    // setActive(-1);
+      }
+    };
+    fetchData();
   }, []);
+
+  // console.log("products", products);
 
   // Product Methods
   const searchProduct = (text: string) => {
@@ -113,11 +95,25 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
     } else {
       setProductsCtg(
         products.filter((value) => {
-          return value.category.$oid === tabViewId;
+          return value.category.id === tabViewId;
         })
       );
     }
   }, [tabViewId]);
+
+  // const tabProcessor = (tabView: string) => {
+  //   if (tabView === "5f15d5cdcb4a6642bddc0fe9p") {
+  //     setProductsCtg(products);
+  //   } else {
+  //     setProductsCtg(
+  //       products.filter((value) => {
+  //         return value.category.$oid === tabView;
+  //       })
+  //     );
+  //   }
+  // };
+  
+  // tabProcessor(tabViewId);
 
   return (
     <ScrollView>
@@ -135,10 +131,13 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
         <>
           <Banner />
           <ScrollView horizontal={true}>
-            <CategoriesFiter setTabViewId={setTabViewId} />
+            <CategoriesFiter
+              setTabViewId={setTabViewId}
+              categories={ProductsCategoriesData}
+            />
           </ScrollView>
           <ScrollView horizontal={true}>
-            {productsCtg.length > 0 ? (
+            {products.length > 0 ? (
               <FlatList
                 data={productsCtg}
                 numColumns={2}

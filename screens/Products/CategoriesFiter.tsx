@@ -1,25 +1,26 @@
 import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,  } from "react";
 import { TabView, TabBar } from "react-native-tab-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Categories, Products } from "../../utils/interface";
-import ProductsCategoriesData from "../../assets/data/categories.json";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 type CategoriesFiterProps = {
   setTabViewId: (index: string) => void;
+  categories: Categories[];
 };
 
 const CategoriesFiter = ({
   setTabViewId,
+  categories,
 }: CategoriesFiterProps) => {
   const [active, setActive] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
 
-  const menuItems = ProductsCategoriesData.map((value) => {
+  const menuItems = categories.map((value) => {
     return {
-      key: value._id.$oid,
+      key: value.id,
       title: value.name,
     };
   });
@@ -32,6 +33,8 @@ const CategoriesFiter = ({
   ];
 
   const [routes] = useState([...allCtr, ...menuItems]);
+  // console.log("menuItems", menuItems);
+  // console.log("routes", routes);
 
   const renderTabBar = (props: any) => (
     <TabBar
@@ -47,9 +50,7 @@ const CategoriesFiter = ({
 
   return (
     <ScrollView>
-      <TouchableOpacity
-        onPress={() => {}}
-      >
+      <TouchableOpacity onPress={() => {}}>
         <>
           <TabView
             navigationState={{ index, routes }}

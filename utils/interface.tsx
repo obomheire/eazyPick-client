@@ -2,9 +2,7 @@ import { KeyboardTypeOptions } from "react-native";
 import { HomeStackProps } from "../types";
 
 export interface Products {
-  _id: {
-    $oid: string;
-  };
+  id: string;
   image: string;
   brand: string;
   price: number;
@@ -14,7 +12,7 @@ export interface Products {
   name: string;
   description: string;
   category: {
-    $oid: string;
+    id: string;
   };
   reviews: reviewsValue[];
   countInStock: number;
@@ -30,9 +28,7 @@ type reviewsValue =  {
 } 
 
 export interface Categories {
-  _id: {
-    $oid: string;
-  };
+  id: string;
   name: string;
   __v: number;
   color: string;
