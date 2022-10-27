@@ -23,8 +23,6 @@ const CategoriesFiter = ({
   //   (state: RootState) => state.categoryItems.categories
   // );
 
-  // console.log("category: =", category);
-
   const menuItems = categories.map((value) => {
     return {
       key: value.id,
