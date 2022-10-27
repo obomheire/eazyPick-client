@@ -5,7 +5,7 @@ import { RootState } from "../redux/store";
 import { Badge, Heading } from "native-base";
 
 const CartIcon = () => {
-  const cartItems = useSelector((state: RootState) => state.cartItems.cart);
+  const cartItems = useSelector((state: RootState) => state.orderItems.cart);
   return (
     <>
       {cartItems.length ? (

@@ -12,12 +12,12 @@ import countries from "../../../assets/countries.json";
 import { Products } from "../../../utils/interface";
 import RNPickerSelect from "react-native-picker-select";
 // import { CheckoutTopTabProps } from "../../../types";
-import { setOrder } from "../../../redux/slices/orderItemsSlice";
+import { createOrder } from "../../../redux/slices/orderSlice";
 
 var { height, width } = Dimensions.get("window");
 
 const Checkout = ({ navigation }: any) => {
-  const cartItems = useSelector((state: RootState) => state.cartItems.cart);
+  const cartItems = useSelector((state: RootState) => state.orderItems.cart);
   const dispatch = useDispatch();
   // const context = useContext(AuthGlobal);
 
@@ -60,7 +60,7 @@ const Checkout = ({ navigation }: any) => {
   }, []);
 
   const checkOut = () => {
-    dispatch(setOrder(order));
+    dispatch(createOrder(order));
     navigation.navigate("Payment");
   };
 

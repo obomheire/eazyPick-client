@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
-import React, { useEffect, useState,  } from "react";
+import React, { useEffect, useState } from "react";
 import { TabView, TabBar } from "react-native-tab-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Categories, Products } from "../../utils/interface";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../redux/store";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -17,6 +19,11 @@ const CategoriesFiter = ({
 }: CategoriesFiterProps) => {
   const [active, setActive] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
+  // const category = useSelector(
+  //   (state: RootState) => state.categoryItems.categories
+  // );
+
+  // console.log("category: =", category);
 
   const menuItems = categories.map((value) => {
     return {
@@ -67,7 +74,6 @@ const CategoriesFiter = ({
           />
           {useEffect(() => {
             setTabViewId(routes[index].key);
-            // console.log(routes[index].key);
             setActive(true);
           }, [routes[index].key])}
         </>

@@ -10,7 +10,7 @@ import {
 import { ProductsCardProps } from "../../utils/interface";
 import { useSelector, useDispatch } from "react-redux";
 // import { RootState } from "../../redux/store";
-import { addToCart } from "../../redux/slices/cartItemsSlice";
+import { addToCart } from "../../redux/slices/orderSlice";
 
 const { width } = Dimensions.get("window");
 

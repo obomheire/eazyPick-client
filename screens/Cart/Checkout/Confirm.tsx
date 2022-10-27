@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { order } from "../../../utils/interface";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart } from "../../../redux/slices/cartItemsSlice";
+import { clearCart } from "../../../redux/slices/orderSlice";
 
 var { height, width } = Dimensions.get("window");
 

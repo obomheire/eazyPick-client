@@ -14,13 +14,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CartStackProps } from "../../types";
-import { removeFromCart, clearCart } from "../../redux/slices/cartItemsSlice";
+import { clearCart } from "../../redux/slices/orderSlice";
 import CartItem from "./CartItem";
 
 var { height, width } = Dimensions.get("window");
 
 const Cart = ({ navigation }: CartStackProps) => {
-  const cartItems = useSelector((state: RootState) => state.cartItems.cart);
+  const cartItems = useSelector((state: RootState) => state.orderItems.cart);
   const dispatch = useDispatch();
 
   let total = 0;
