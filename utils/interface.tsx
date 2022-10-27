@@ -91,10 +91,6 @@ export type order = {
   zip: string;
 };
 
-// export interface CartItemsState {
-//   cart: Products[];
-// }
-
 export interface OrderState {
   order: order;
   cart: Products[];
