@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, clearCart } from "../../redux/slices/cartItemsSlice";
+import { removeFromCart, clearCart } from "../../redux/slices/orderSlice";
 import { CartItemProps } from "../../utils/interface";
 import { SwipeListView } from "react-native-swipe-list-view";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -57,7 +57,7 @@ const CartItem = ({ cartItems }: CartItemProps) => {
       renderHiddenItem={({ item }) => (
         <TouchableOpacity
           style={styles.hiddenButton}
-          onPress={() => dispatch(removeFromCart(item._id.$oid))}
+          onPress={() => dispatch(removeFromCart(item.id))}
         >
           <View>
             <Icon name="trash" color={"red"} size={30} />

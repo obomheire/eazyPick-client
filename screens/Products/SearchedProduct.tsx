@@ -17,7 +17,7 @@ const SearchedProduct = ({ productsFiltered }: SearchedProductProps) => {
       {productsFiltered.length > 0 ? (
         <FlatList
           data={productsFiltered}
-          keyExtractor={(item) => item._id.toString()}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={{ flexDirection: "row", margin: 5}}>
               <View style={{padding: 10}}>

@@ -14,14 +14,14 @@ import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
 import { Categories, Products } from "../../utils/interface";
 import ProductList from "./ProductsList";
-// import SearchedProduct from "./SearchedProducts";
-import productsData from "../../assets/data/products.json";
 import ProductsCategoriesData from "../../assets/data/categories.json";
 import SearchBar from "../../shared/SearchBar";
 import SearchedProduct from "./SearchedProduct";
 import Banner from "../../shared/Banner";
 import CategoriesFiter from "./CategoriesFiter";
 import { HomeStackProps } from "../../types";
+import { useDispatch } from "react-redux";
+import { addCategories } from "../../redux/slices/productSlice";
 
 const { height } = Dimensions.get("window");
 
@@ -32,6 +32,8 @@ const { height } = Dimensions.get("window");
 // };
 
 const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
+  const dispatch = useDispatch();
+
   const allCtr = [
     {
       key: "5f15d5cdcb4a6642bddc0fe9p",
@@ -52,7 +54,7 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
   // const [route, setRoute] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProducts = async () => {
       try {
         const response = await axios.get(`${baseURL}/products`);
         const data = await response.data;
@@ -67,10 +69,30 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
         console.log(error);
       }
     };
-    fetchData();
-  }, []);
 
-  // console.log("products", products);
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${baseURL}/categories`);
+        const data = await response.data;
+        setCategories(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // const fetchCategories = async () => {
+    //   try {
+    //     const response = await axios.get(`${baseURL}/categories`);
+    //     const data = await response.data;
+    //     dispatch(addCategories(data));
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+
+    fetchCategories();
+    fetchProducts();
+  }, []);
 
   // Product Methods
   const searchProduct = (text: string) => {
@@ -101,20 +123,6 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
     }
   }, [tabViewId]);
 
-  // const tabProcessor = (tabView: string) => {
-  //   if (tabView === "5f15d5cdcb4a6642bddc0fe9p") {
-  //     setProductsCtg(products);
-  //   } else {
-  //     setProductsCtg(
-  //       products.filter((value) => {
-  //         return value.category.$oid === tabView;
-  //       })
-  //     );
-  //   }
-  // };
-  
-  // tabProcessor(tabViewId);
-
   return (
     <ScrollView>
       <SearchBar
@@ -142,7 +150,6 @@ const ProductsContainer = ({ navigation }: HomeStackProps<"HomeScreen">) => {
                 data={productsCtg}
                 numColumns={2}
                 keyExtractor={(item, index) => {
-                  // console.log(item._id.$oid);
                   return index.toString();
                 }}
                 renderItem={({ item }) => (

@@ -91,13 +91,19 @@ export type order = {
   zip: string;
 };
 
-export interface CartItemsState {
+// export interface CartItemsState {
+//   cart: Products[];
+// }
+
+export interface OrderState {
+  order: order;
   cart: Products[];
 }
 
-export interface OrderItemsState {
-  order: order;
+export interface ProductState {
+  categories: Categories[];
 }
+
 
 export type methodValue = {
   name: string;
